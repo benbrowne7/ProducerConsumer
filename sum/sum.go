@@ -11,11 +11,11 @@ func main() {
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			sum = sum + 1
-			wg.Done()
 		}()
+		wg.Wait()
 	}
 
-	wg.Wait()
 	fmt.Println(sum)
 }
